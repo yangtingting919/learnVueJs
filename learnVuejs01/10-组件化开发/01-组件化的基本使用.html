@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+        <!--
+            注册组件三个步骤：
+                1.【创建组件构造器】--调用Vue.extend()方法创建组件构造器
+                --通常创建组件构造器时，传入template代表自定义组件的模板
+                --该模板就是在使用到组件的地方，要显示的HTML代码
+
+                2.【注册组件】--调用Vue.component()方法注册组件
+                --调用Vue.component()将刚才组件构造器注册为一个组件，并且给它起一个组件的标签名称
+                --所以需传递两个参数：1.注册组件的标签名 2.组件构造器
+
+                3.【使用组件】--在Vue实例的作用范围内使用组件
+                --组件必须挂载在某个Vue实例下，否则它不会生效
+
+                talk is cheap   show me the code
+            -->
+    </head>
+
+    <body>
+        <div id="app">
+            <!-- 3.使用组件 -->
+            <my-cpn></my-cpn>
+            <my-cpn></my-cpn>
+            <my-cpn></my-cpn>
+            <my-cpn></my-cpn>
+        </div>
+
+        <script>
+            // 1.创建组件构造器对象
+            //【`` 模板字符串】
+            //【注意】：Vue.extend写法在Vue 2.0文档中几乎不再使用，一般使用语法糖
+            const cpnC = Vue.extend({
+                template:`
+                <div>
+                <h2>我是标题</h2>
+                <p>我是内容，嘎嘎嘎嘎嘎嘎</p>
+                <p>我是内容，hhhhhhhhhhh</p>
+                </div>
+                `
+            });
+            //2.注册组件
+            // Vue.component('组件标签名',组件构造器)
+            Vue.component('my-cpn',cpnC);
+
+
+            const app =new Vue({
+                el:'#app',
+                data:{
+                    message:"你好啊"
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>v-once指令的使用</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <h2>{{message}}</h2>
+            <h2 v-once>{{message}}</h2>  
+            <!-- 第一次加载时都为【你好啊】,在浏览器console中执行 app.message="啦啦啦"，页面第一行被改变为【啦啦啦】,第二行不变,因为使用了v-once指令 -->
+            <!-- v-once指令，用于有时不希望界面随意的跟随改变 -->
+            <!-- 该指令后无需跟任何表达式 -->
+            <!-- 该指令表示元素和组件只渲染一次，不随数据改变而改变 -->
+        </div>
+        <script>
+            const app = new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊"
+                }
+            });
+        </script>
+    </body>
+</html>

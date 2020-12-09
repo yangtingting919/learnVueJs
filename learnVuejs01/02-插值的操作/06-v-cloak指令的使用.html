@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+        <style>
+            /* cloak：斗篷 */
+            [v-cloak]{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 在某些情况下，浏览器可能会直接显示出未编译的Mustache标签 -->
+        <div id="app" v-cloak>
+            <h2>{{message}}</h2> <!-- 显示的是 【你好啊】 -->
+        </div>
+        <script>
+
+            // setTimeout(function(){
+            //     const app=new Vue({
+            //     el:"#app",
+            //     data:{
+            //         message:"你好啊"
+            //     }
+            // });
+            // },1000);
+            
+
+            //在vue解析前，div中有一属性cloak
+            //在vue解析后，div中没有属性cloak
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊"
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{message}}</h2>
+        <cpn1></cpn1>
+    </div>
+
+    <!-- 
+    【组件不可访问Vue实例数据】
+    1.组件是一个单独功能模块的封装：该模块有属于自己的HTML模板，也应有属于自己的数据data
+    2.组件中的数据保存在哪呢？顶层Vue实例中吗？
+    ：不是！组件对象也有一个data等属性，且data属性必须是一个函数，且该函数返回一个对象，对象内部保存着数据 -->
+
+    <!-- 组件模板 -->
+    <template id="cpn1">
+        <div>
+            <h1>{{title}}</h1>
+            <p>我是内容</p>
+        </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.component('cpn1',{
+            template:'#cpn1',
+            //data必须为一个返回对象的函数
+            data (){//应该在此处保存！
+                return {
+                    title:'咿呀咿呀呦'
+                }
+            }
+        });
+
+        const app =new Vue({
+            el:'#app',
+            data:{
+                message:'你好吗',
+                // title:'啦啦啦啦'//组件不能直接访问Vue实例中的data
+            }
+        });
+    </script>
+</body>
+</html>

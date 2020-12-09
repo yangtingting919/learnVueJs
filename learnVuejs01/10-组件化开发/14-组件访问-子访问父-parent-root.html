@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{message}}
+    <cpn></cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <ccpn></ccpn>
+    </div>
+  </template>
+
+  <template id="ccpn">
+    <button @click="btnClick">按钮</button>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const ccpn={
+      template:"#ccpn",
+      methods:{
+        btnClick(){
+          // 1.【$parent 不常用】
+          console.log(this.$parent);
+          this.$parent.show();
+          // 2.【$root 不常用】
+          console.log(this.$root);
+          console.log(this.$root.message);
+        }
+      },
+    }
+    const cpn ={
+      template:"#cpn",
+      methods:{
+        show(){
+          console.log("showparent");
+        }
+      },
+      data(){
+        return {
+          name:"qq"
+        }
+      },
+      components:{
+        ccpn
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      data:{
+        message:"你好"
+      },
+      methods:{
+      },
+      components:{
+        cpn
+      }
+    });
+  </script>
+</body>
+</html>

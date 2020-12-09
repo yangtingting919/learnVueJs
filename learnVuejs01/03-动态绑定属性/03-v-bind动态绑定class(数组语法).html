@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 该语法用得较少,一般使用对象语法 -->
+            <h2 class="title" :class="['active','line']">{{message}}</h2>  <!--相当于 <h2 class="title active line">{{message}}</h2> -->
+            <h2 v-bind:class="[active,line]"></h2>  <!-- 没加单引号时为变量 -->
+            <h2 :class="getClasses()"></h2>
+        </div>
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊",
+                    active:'aa',
+                    line:'bb'
+                },
+                methods:{
+                    getClasses:function(){
+                        return [this.active,this.line];
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

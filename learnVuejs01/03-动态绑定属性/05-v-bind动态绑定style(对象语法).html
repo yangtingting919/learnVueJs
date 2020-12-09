@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- <h2 :style="{key(属性名):value(属性值)}">{{message}}</h2> -->
+
+            <h2 :style="{fontSize:'15px'}">{{message}}</h2> <!-- 15px加引号,不然会被识别为变量,找不到该变量则报错 -->
+            <h2 :style="{'font-size':'15px'}">{{message}}</h2> <!-- 都加引号,不然报错量 -->
+
+            <h2 :style="{fontSize:finalSize,color:finalColor}">{{message}}</h2>
+            <h2 :style="{fontSize:fSize +'px',color:finalColor}">{{message}}</h2>
+            <h2 :style="getStyles()">{{message}}</h2>  <!-- 对象太长,可用方法返回 -->
+            
+        </div>
+
+        <script>
+            const app=new Vue({
+                el:"#app",  
+                data:{
+                    message:"你好啊",
+                    finalSize:'20px',
+                    fSize:20,
+                    finalColor:'red'
+                },
+                methods:{
+                    getStyles:function(){
+                        return {fontSize:this.finalSize,color:this.finalColor};
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

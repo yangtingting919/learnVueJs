@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <my-cpn></my-cpn>
+        </div>
+        <div id="app2">
+            <my-cpn></my-cpn>
+        </div>
+
+        <div id="appIns">
+            <cpn></cpn>
+        </div>
+        <div id="app3"> 
+            <cpn></cpn> <!-- 因为是在appIns实例下注册的，这里不再能够使用 -->
+        </div>
+        <script>
+            //1.创建组件构造器
+            const cpnC=Vue.extend({
+                template:`
+                <div>
+                <h2>我是标题</h2>
+                <p>我是内容，hhhhhhhhhhh</p>
+                </div>
+                `
+            });
+
+            //2.注册组件(【全局组件】：意味着可在多个Vue实例中(见下面app与app2实例)使用！)
+            //真实开发中，一般注册一个Vue实例
+            Vue.component('my-cpn',cpnC);
+            const app =new Vue({
+                el:'#app',
+                data:{
+                    message:"你好啊"
+                }
+            });
+            const app2 =new Vue({
+                el:'#app2',
+                data:{
+                    message:"你好啊"
+                }
+            });
+
+
+            const appIns=new Vue({
+                el:'#appIns',
+                data:{
+                    message:"你好啊"
+                },
+                //【局部组件】：在某个Vue实例下注册，就只能在该实例下使用
+                //注意是conponents
+                components:{
+                    //使用组件时的标签名与组件构造器
+                    cpn:cpnC
+                }
+            });
+            const app3 =new Vue({
+                el:'#app3',
+                data:{
+                    message:"你好啊"
+                }
+            });
+
+            // 【总结】
+            //在真实开发中一般注册一个Vue实例
+            //并且多数使用局部组件
+        </script>
+    </body>
+</html>

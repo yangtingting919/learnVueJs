@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    {{message}}
+    <button @click="btnClick">按钮</button>
+    <cpn ref="cpn1"></cpn>
+    <cpn ref="cpn2"></cpn>
+  </div>
+
+  <template id="cpn">
+    <div></div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const cpn ={
+      template:"#cpn",
+      methods:{
+        show(){
+          console.log("show");
+        },
+        test() {
+          console.log("test一下");
+        }
+      },
+      data(){
+        return {
+          name:"sansan"
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      data:{
+        message:"你好"
+      },
+      methods:{
+        btnClick(){
+          //1.【$children 不常用】
+          // console.log(this.$children);
+          // this.$children[0].show();
+          // console.log(this.$children[0].name);
+          // for(let obj of this.$children){
+          //   console.log(obj.name)
+          // }
+          //2.【$refs 常用】
+          console.log(this.$refs);//当子组件没绑定ref时，默认为一个空对象
+          //这时为不为{} 原因是(子组件实例已创建)DOM节点已生成。
+          this.$refs.cpn1.show();
+          console.log(this.$refs.cpn2.name);
+        }
+      },
+      components:{
+        cpn
+      },
+      created() {
+        //https://blog.csdn.net/daxianghaoshuai/article/details/80620815
+
+        // console.log(this.$refs);//这时为{} 在生命周期mounted之前的钩子函数中去调用会获取不到，原因是(子组件实例已创建)DOM节点都没有生成。
+        // this.$refs.cpn1.test();//报错 'test' of undefined"
+      },
+      mounted() {
+        console.log(this.$refs);//这时为不为{} 原因是(子组件实例已创建)DOM节点已生成。
+        this.$refs.cpn1.test();
+
+        //去操作子组件，要等子组件dom已生成，组件先创建实例，再渲染dom。要先有实例，才能去调用人家的方法和属性嘛。
+      }
+    });
+  </script>
+</body>
+</html>

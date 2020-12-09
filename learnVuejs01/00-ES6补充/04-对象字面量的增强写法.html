@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+
+        </div>
+        <script>
+            // const obj=new Object(); 
+            // const obj={
+            //     name:"vava",
+            //     age:19,
+            //     run:function(){
+            //         console.log('跑');
+            //     },
+            //     eat:function(){
+            //         console.log('吃');
+            // }
+
+            //1.属性的增强写法
+            const name="nini";
+            const age=20;
+            //ES5写法
+            const obj={
+                name:name,
+                age:age
+            }
+            console.log(obj);
+            //ES6写法
+            const obj2={
+                name,
+                age
+            }
+            console.log(obj2);
+
+            //2.函数的增强写法
+            //ES5写法
+            const obj3={
+                run:function(){
+                    console.log('跑3');
+                },
+                eat:function(){
+                    console.log('吃3');
+                }
+            }
+            //ES6写法
+            const obj4={
+                run(){
+                    console.log('跑-');
+                },
+                eat(){
+                    console.log('吃-');
+                }
+            }   
+
+            //扩充
+            //angular ==>google
+            //TypeScript(ts 类型检测)==>microsoft
+            //flow ==>facebook
+            
+            //react ==>facebook
+        </script>
+    </body>
+</html>

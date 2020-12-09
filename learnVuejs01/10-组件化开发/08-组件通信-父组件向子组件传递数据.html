@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <h2>{{message}}</h2> -->
+
+        <cpn v-bind:cmovies="movies" :cmessage="message"></cpn>
+
+        <!-- 当没传message值，此时cmessage为默认值  -->
+        <!-- <cpn v-bind:cmovies="movies" ></cpn>   -->
+        <!--并且！！由于设置了required为true即必传值， 报错缺失必传属性 ： Missing required prop: "cmessage" -->
+
+        <!-- 当没传movies值，此时cmovies为默认值 ，注意默认值设置方式为函数-->
+        <!-- <cpn :cmessage="message"></cpn> -->
+
+        
+    </div>
+
+    <template id="cpn1">
+        <!-- 使用传过来的参数 -->
+        <div>
+            <h2>{{cmessage}}</h2>
+            <p>{{cmovies}}</p>
+            <ul>
+                <li v-for="(item,index) in cmovies">
+                    {{item}}
+                </li>
+            </ul>
+        </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const cpn={
+            template:'#cpn1',
+            // 1.props可为一个【数组】
+            // props:['cmovies','cmessage'],//里面为变量
+            //2.props也可为一个【对象】
+            props:{
+                   // 类型限制
+            //     cmovies:Array,
+            //     cmessage:String
+
+                    //指定默认值或必传值
+                    cmessage:{
+                        type:String,
+                        default:'啦啦啦',
+                        required:true //必传，否则报错
+                    },
+                    cmovies:{
+                        type:Array,
+                        //default:[], //如果相应版本此种默认方式报错:【Invalid default value for prop "cmovies": Props with type Object/Array must use a factory function to return the default value.】，就使用下面返回一个数组的方法
+                        default (){//类型是对象或数组时，默认值必须从一个工厂函数获取！！
+                            return []
+                        },
+                    },
+                    //还可自定义验证函数
+                    validator:function(value){
+                        return ['success','warning','danger'].indexOf(value) !== -1
+                    }
+            },
+            data (){
+                return {}
+            },
+            methods:{
+
+            }
+        }
+
+        //父组件
+        const app =new Vue({
+            el:'#app',
+            data:{
+                message:'你好吗',//将该参数传给子组件
+                movies:['回家的诱惑','海王','盗梦空间']//将该参数传给子组件
+            },
+            components:{
+                cpn:cpn
+                // 也可直接写一个cpn属性增强写法
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <button>按钮4</button>
+        <button>按钮5</button>
+
+        <script>
+            //ES5之前因为if和for都没有块级作用域的概念,所以在很多时候,我们必须借助于function的作用域来解决应用外面变量的问题
+            //ES6中,加入了let,let它是有if和for的作用域的.
+
+            /*****1.变量作用域:变量在什么范围内是可用*****/
+            {
+                var name="why";
+                console.log(name);
+            }
+            console.log(name);//在块外面也可使用,var无块级作用域!
+            /*****2.无块级作用域引起的问题:if的块级*****/
+            var func;
+            if(true){
+                var name="why1";
+                func=function(){
+                    console.log(name);
+                }
+                // func();
+            }
+            //console.log(name);//依旧可使用,因为无块级作用域,说明if条件没做到任何限制.
+            name="lala";//在调用方法前,该变量被改
+            func();
+
+            /*****3.无块级作用域引起的问题:for的块级*****/
+            var btns=document.getElementsByTagName('button');
+            for(var i=0;i<btns.length;i++){
+                btns[i].addEventListener('click',function(){
+                    console.log('第'+i+'个按钮被点击');//[第5个按钮被点击] ,i已被改变!
+                });
+            }
+
+            //为啥闭包可解决问题:函数是一个作用域,函数的参数值不会被改变,外面怎么改不会影响函数的参数值
+            //函数有作用域,if和for无作用域
+            for(var i=0;i<btns.length;i++){
+                (function(num){
+                    btns[i].addEventListener('click',function(){
+                    console.log('第'+num+'个按钮被点击');//[第i个按钮被点击]
+                });
+                })(i)
+            }
+
+            //用let  let具有块级作用域 let不存在变量提升,即只能先声明再使用否则报错.(变量提升:即变量可在声明前使用,如var存在变量提升)
+            for(let i=0;i<btns.length;i++){
+                btns[i].addEventListener('click',function(){
+                    console.log('第'+i+'个按钮被点击');//[第i个按钮被点击]
+                });
+            }
+                
+        </script>
+    </body>
+</html>

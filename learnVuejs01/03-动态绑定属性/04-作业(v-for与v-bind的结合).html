@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>作业</title>
+        <script src="../js/vue.js"></script>
+        <style>
+            .active{
+                color:red;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 需求:开始加载第一行为红色,后面点击谁,谁为红色 -->
+        <div id="app">
+            <ul>
+                <!-- <li v-bind:class="getClasses(index)" v-for="(m,index) in movies" @click="lClick(index)">{{index}} {{m}}</li> -->
+                <li v-bind:class="{active:index===currentIndex}" v-for="(m,index) in movies" @click="lClick(index)">{{index}} {{m}}</li>
+
+            </ul>
+        </div>
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    movies:['电影A','电影B','电影C','电影D'],
+                    isActive:true,
+                    currentIndex:0 //初始值为第一行
+                },
+                methods:{
+                    lClick:function(clickIndex){//点击哪行将值赋值给currentIndex
+                        this.currentIndex=clickIndex;
+                    }
+                    // ,
+                    // getClasses:function(index){
+                    //     console.log("classIndex:"+index);
+                    //     if(index==this.currentIndex){
+                    //         return {active:this.isActive}
+                    //     }else{
+                    //         return {active:!this.isActive}
+                    //     }
+                    // }
+                }
+            });
+        </script>
+    </body>
+</html>

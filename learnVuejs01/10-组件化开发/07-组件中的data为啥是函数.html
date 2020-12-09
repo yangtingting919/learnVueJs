@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h2>{{message}}</h2>
+        
+        <!-- 组件实例对象 -->
+        <cpn1></cpn1>
+        <cpn1></cpn1>
+        <cpn1></cpn1>
+
+    </div>
+    
+    <template id="cpn1">
+        <div>
+            <h2>当前计数：{{counter}}</h2>
+            <button @click="increment">+</button>
+            <button @click="decrement">-</button>
+        </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.component('cpn1',{
+            template:'#cpn1',
+            //data必须为一个返回对象的函数：保证各组件实例调用返回的不是同一个对象
+            data (){
+                return {
+                    counter:0
+                }
+            },
+            methods:{
+                increment(){
+                    this.counter ++;
+                },
+                decrement(){
+                    this.counter --;
+                }
+            }
+        });
+
+        const app = new Vue({
+            el:'#app',
+            data:{
+                message:'你好吗',
+            }
+        });
+    </script>
+
+    <script>
+        function abc(){
+            return{
+                name:'tt',
+                age:'19'
+            }
+        }
+        let obj1=abc();
+        let obj2=abc();
+        let obj3=abc();
+
+        obj1.name='lala';//查看 obj2 obj3的name值没改变  说明这三个不是同一个对象
+        console.log(obj1);
+        console.log(obj2);
+        console.log(obj3);
+
+        // 但如果像以下
+        let obj={
+            name:'why',
+            age:18
+        }
+        function d (){
+            return obj;
+        }
+        let obj3=b();
+        let obj4=b();
+        let obj5=b();
+        // 此时这三个为同一个对象
+    </script>
+</body>
+</html>

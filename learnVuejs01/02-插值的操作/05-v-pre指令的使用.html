@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>{{message}}</h2> <!-- 显示的是 【你好啊】 -->
+            <h2 v-pre>{{message}}</h2>  <!-- 显示的是 【{{message}}】 -->
+            <!-- v-pre指令将元素内容原封不动展示，无需作任何解析 -->
+        </div>
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊"
+                }
+            });
+        </script>
+    </body>
+</html>

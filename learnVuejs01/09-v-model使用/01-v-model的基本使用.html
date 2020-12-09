@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <!-- 【v-model实现表单元素和数据的双向绑定】：
+            因为在input中v-model绑定了message,所以会实时将输入的内容传递给message，message发生改变，
+            当message发生改变，mustache语法将message的值插入到DOM中，所以DOM会发生响应的改变
+            所以，v-model实现了双向绑定 
+            
+            也可绑定textarea元素
+            <textarea v-model="message"></textarea>
+        -->
+        
+        <div id="app">
+            <input type="text" v-model="message"/>
+                {{message}}
+
+            <!-- <textarea v-model="message"></textarea> -->
+        </div>
+        <script>
+            //当在输入框中改变message，data中的message的也被改变
+            //当在浏览器console中执行app.message='ddd',页面也被改变
+            const app =new Vue({
+                el:'#app',
+                data:{
+                    message:"你好啊"
+                }
+            });
+        </script>
+    </body>
+</html>

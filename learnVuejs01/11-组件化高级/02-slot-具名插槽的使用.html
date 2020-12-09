@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<!-- 插槽的基本使用 
+    1.在template中定义 <slot></slot>
+    2.插槽的默认值 <slot>button</slot>
+    3.若有多个值同时放在组件中进行替换时，一起作为替换元素
+-->
+<body>
+  <!-- [此种方式已被废弃，推荐使用 v-slot] -->
+  <!-- <div id="app">
+    <cpn>
+      <span slot="left">左边</span>
+      <button slot="middle">中间</button>
+      <i slot="right">右边</i>
+    </cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <slot></slot>
+      <slot name="left">左</slot>
+      <slot name="middle">中</slot>
+      <slot name="right">右</slot>
+    </div>
+  </template> -->
+
+  <div id="app">
+    <cpn>
+    <template v-slot:left>
+        <button>左边便</button>
+    </template>
+    </cpn>
+
+    <cpn>
+      <template v-slot:right>
+          <button>右边边</button>
+      </template>
+    </cpn>
+  </div>
+
+
+
+  <template id="cpn">
+    <div>
+      <slot></slot>
+      <slot name="left">左</slot>
+      <slot name="middle">中</slot>
+      <slot name="right">右</slot>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const cpn={
+      template:"#cpn"
+    }
+
+    const app = new Vue({
+      el: "#app",
+      components:{
+        cpn
+      }
+    });
+  </script>
+</body>
+</html>

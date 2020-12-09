@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>{{message}}</h2>
+        </div>
+        <script>
+            /***const修饰常量 const实际保存的是内存地址,该指向不能随意改变
+             *  与let一样不存在变量提升,即只能先声明再使用否则报错.(变量提升:即变量可在声明前使用,如var存在变量提升)
+             *  建议==>在ES6中,优先使用const,只有需要改变某一个标识符时才使用let
+             * ***/
+
+            //注意一:一旦给const修饰的标识符赋值后,不能修改
+            const name="dd";
+            // name="lala"; 是错误的,不能修改了
+
+            //注意二:使用const定义标识符,必须同时立即初始化赋值
+            // const age; //是错误的,应定义同时赋值:const age=19;
+            // age=19;
+            const age=19;
+
+            //注意三:常量的含义,是指向的对象不能修改,但是可以改变对象内部的属性
+            const obj={
+                name:"lala",
+                age:19,
+                height:1.88
+            }
+            console.log(obj);
+            //obj={};//是错误的,obj的执行改变了 ,不能被修改
+            obj.name="vv";//内部属性可改
+            obj.age=20;
+            console.log(obj);
+
+            //在浏览器console中执行 app.message="哈哈",同理,并没修改app的指向(内存地址)即将该对象指向另一地址,只是修改了其属性!
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊"
+                }
+            });
+
+        </script>
+    </body>
+</html>

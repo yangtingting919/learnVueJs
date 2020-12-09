@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <button>按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+        <button>按钮4</button>
+        <button>按钮5</button>
+
+        <script>
+
+            /*****情况一:ES5没有使用闭包(错误方式)*****/
+            var btns=document.getElementsByTagName('button');
+            for(var i=0;i<btns.length;i++){
+                btns[i].addEventListener('click',function(){
+                    console.log('第'+i+'个按钮被点击');//[第5个按钮被点击] ,i已被改变!
+                });
+            }
+
+            /*****情况二:ES5使用闭包,函数有作用域*****/
+            for(var i=0;i<btns.length;i++){
+                (function(num){
+                    btns[i].addEventListener('click',function(){
+                    console.log('第'+num+'个按钮被点击');//[第i个按钮被点击]
+                });
+                })(i)
+            }
+
+            /*****情况三:let具有块级作用域*****/
+            //let不存在变量提升,即只能先声明再使用否则报错.(变量提升:即变量可在声明前使用,如var存在变量提升)
+            for(let i=0;i<btns.length;i++){
+                btns[i].addEventListener('click',function(){
+                    console.log('第'+i+'个按钮被点击');//[第i个按钮被点击]
+                });
+            }
+                
+        </script>
+    </body>
+</html>

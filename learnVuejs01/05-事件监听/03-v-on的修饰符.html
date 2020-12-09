@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 1. .stop的使用 -->
+            <!--.stop 点击此按钮,只进行btnClick的响应,完成响应后立即stop,不再进行其他响应 -->
+            <div @click="divClick"> aaaa
+                <button @click.stop="btnClick">按钮</button>         
+            </div>
+
+            <!-- 2. .prevent修饰符的使用 -->
+            <!-- 阻止其默认事件 -->
+            <br>
+            <form action="baidu">
+                <input type="submit" value="提交" @click.prevent="submitClick">
+            </form>
+
+            <!-- 3.监听某个键盘的键帽  .enter-->
+            <input type="text" @keyup.enter="keyUp">
+
+            <!-- 4. .once修饰符的使用 -->
+            <br>
+            <button @click.once="btnClick2">按钮2</button> <!-- 该方法只执行1次 -->
+        </div>
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊"
+                },
+                methods:{
+                    btnClick(){
+                        console.log("btnClick");
+                    },
+                    divClick(){
+                        console.log("divClick");
+                    },
+                    submitClick(){
+                        console.log("submitClick");
+                    },
+                    keyUp(){
+                        console.log('keyUp');//敲回车打印
+                    },
+                    btnClick2(){
+                        console.log("btnClick2");
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

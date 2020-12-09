@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <!-- {{movies}} -->
+            <!-- <ul>
+                <li>{{movies[0]}}</li>
+                <li>{{movies[1]}}</li>
+                <li>{{movies[2]}}</li>
+            </ul> -->
+            <ul>
+                <li v-for="item in movies">{{item}}</li>
+            </ul>
+            
+        </div>
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊",
+                    movies:['回家的诱惑','盗梦空间','没关系']
+                }
+            });
+
+            //响应式
+            //可在浏览器console 直接app.movies.push("阿楚姑娘"); 页面也被刷新
+        </script>
+    </body>
+</html>

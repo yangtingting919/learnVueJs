@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>{{counter}}</h2>
+            <!-- <button v-on:click="counter++">+</button>-->
+            <!-- <button @click="counter--">-</button>  -->
+            
+            <button v-on:click="add">+</button>  <!-- 没有参数时方法名后可不加小括号 -->
+            <button @click="sub">-</button>
+            <!-- v-on:click ===> @click (语法糖) -->
+            <!-- v-bind:===>:(直接一个冒号,语法糖) -->
+        </div>
+
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    counter:0
+                },
+                methods:{
+                    add(){
+                        this.counter++;
+                    },
+                    sub(){
+                        this.counter--;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <style>
+        .active{
+            color:red
+        }
+    </style>
+
+    <body>
+         <!-- 需求:开始加载第一行为红色,后面点击谁,谁为红色 -->
+        <div id="app">
+            <ul>
+                <!-- <li v-for="(item,index) in movies" v-bind:class="{active:true}" >{{index}}{{item}}</li> -->
+                <li v-for="(item,index) in movies" 
+                    v-bind:class="{active:index===currentIndex}" 
+                    @click="lClick(index)">{{index}}{{item}}</li>
+            </ul>
+        </div>
+        <script>
+            const app=new Vue({
+                el:'#app',
+                data:{
+                    movies:['回家的诱惑哈哈','盗梦空间','海贼王','海尔兄弟'],
+                    currentIndex:0
+                },
+                methods:{
+                    lClick(index){
+                        this.currentIndex=index;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <cpn v-bind:cmessage="message" v-bind:cInfo="info"></cpn> -->
+        <!-- 页面cInfo为空对象{}，说明值没传过来，【原因】是当属性定义为驼峰形式，并有值传过来时，v-bind是不支持的 -->
+
+        <!-- 这时如果采取这种方式 c-info，可被识别 -->
+        <cpn v-bind:cmessage="message" v-bind:c-info="info"></cpn>
+
+
+        <!-- <cpn v-bind:userName="name"></cpn> 这种方式无法识别，用下面方式-->
+        <!-- <cpn v-bind:user-name="name"></cpn> -->
+
+        <!-- 【总结】：可不采用驼峰式，直接全部小写 -->
+    </div>
+    
+    <template id="cp1">
+        <div>
+            <h2>{{cmessage}}</h2>
+            <h2>{{cInfo}}</h2>
+            <!-- 组件实例自己使用时即无值传过来时，驼峰写法可被识别 -->
+            <h1>{{childMyHobby}}</h1>
+            <p>{{userName}}</p>
+        </div>
+    </template>
+
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const cpnObj={
+            template:'#cp1',
+            props:{
+                cmessage:{
+                    type:String,
+                    default:'啦啦啦啦'
+                },
+                cInfo:{
+                    type:Object,
+                    default (){//类型是对象或数组时，默认值必须从一个工厂函数获取！！
+                        return {}
+                    }
+                },
+                childMyHobby:{
+                    type:String,
+                    default:'sing'
+                },
+                userName:{
+                    type:String,
+                    default:'dodo'
+                }
+            },
+            data (){
+                return{}
+            }
+        }
+
+        const app =new Vue({
+            el:'#app',
+            data:{
+                message:'你好吗',
+                info:{
+                    name:'sansan',
+                    age: 19
+                },
+                name:"亚拉"
+            },
+            components:{
+                cpn:cpnObj
+            }
+        });
+    </script>
+</body>
+</html>

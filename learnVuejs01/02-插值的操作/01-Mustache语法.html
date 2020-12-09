@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- Mustache语法，又称胡须语法。 -->
+            <h2>{{message}}</h2>
+            <h2>{{message}},李银河</h2>
+            <!-- 在mustache语法中，不仅可直接写变量，还可写简单表达式 -->
+            <h2>{{firstName + lastName}}</h2>
+            <h2>{{firstName + ' ' +lastName}}</h2>
+            <h2>{{firstName}} {{lastName}}</h2>
+            <h2>{{couter * 2}}</h2>
+        </div>
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"啦啦啦",
+                    firstName:'kobe',
+                    lastName:'bryant',
+                    couter:100
+                }
+            });
+        </script>
+    </body>
+</html>

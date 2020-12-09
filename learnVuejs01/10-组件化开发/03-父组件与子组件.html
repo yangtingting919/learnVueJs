@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+            <cpn1></cpn1>
+            <cpn2></cpn2>
+            <cpn4></cpn4>
+
+            <!-- 使用该组件会报错，因为没有在该实例下注册，想要使用先注册 -->
+            <!-- <cpn3></cpn3> -->
+
+        </div>
+        <script>
+            //创建第一个组件构造器
+            const cpnC1 = Vue.extend({
+                template:`
+                    <div>
+                        <h2>我是标题1</h2>
+                        <p>我是内容，哈哈哈哈哈哈</p>
+                        <hr />
+                    </div>
+                `
+            });
+            //创建第二个组件构造器
+            const cpnC2 = Vue.extend({
+                template:`
+                    <div>
+                        <h2>我是标题2</h2>
+                        <p>我是内容，gagagagagagaag</p>
+                        <hr />
+                    </div>
+                `
+            });
+
+
+
+            //创建第三个组件构造器【子组件】
+            const cpnC3=Vue.extend({
+                template:`
+                <div>
+                        <h2>我是标题3</h2>
+                        <p>我是内容，子组件</p>
+                    </div>
+                `,
+            });
+
+            //创建第四个组件构造器【父组件】
+            const cpnC4 = Vue.extend({
+            template:`
+                    <div>
+                        <h2>我是标题4</h2>
+                        <p>我是内容，父组件</p>
+                        <cpn3></cpn3>          
+                    </div>
+                `,// 可在模板这里使用注册的组件
+
+                //【在某个组件下注册另一组件】
+                components:{
+                    cpn3:cpnC3 //在该组件下注册第三个组件
+                }
+            });
+
+            //可看作【root根组件】
+            const app =new Vue({
+                el:'#app',
+                data:{
+                    message:"你好啊"
+                },
+                //在相应实例下--注册局部组件
+                components:{
+                    cpn1:cpnC1,
+                    cpn2:cpnC2,
+                    cpn4:cpnC4
+                }
+            });
+        </script>
+    </body>
+</html>

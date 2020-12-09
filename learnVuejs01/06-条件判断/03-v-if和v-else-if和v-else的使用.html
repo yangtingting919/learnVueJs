@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <!-- v-if与v-if-else与v-else的使用-->
+            <h2 v-if="score >=90">优秀</h2>
+            <h2 v-else-if="score>=80">良好</h2>
+            <h2 v-else-if="score >=60">及格</h2>
+            <h2 v-else>不及格</h2>
+            
+            <!-- 当逻辑复杂的推荐使用计算属性 -->
+            <h2>{{result}}</h2>
+
+            <!-- 改变score的值观察，可在浏览器console中执行app.score=59或者其他值观察页面-->
+        </div>
+        <script>
+            const app=new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊",
+                    score:90
+                },
+                //当逻辑复杂的推荐使用计算属性
+                computed:{
+                    result(){
+                        let showMessage="";
+                        if(this.score >=90){
+                            showMessage="优秀";
+                        }else if(this.score >=80){
+                            showMessage="良好";
+                        }else if(this.score >=60){
+                            showMessage="及格";
+                        }else{
+                            showMessage="不及格";
+                        }
+                        return showMessage;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

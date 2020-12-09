@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>v-text指令的使用</title>
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h2>{{message}}</h2>
+            <!-- v-text与mustache{{}}语法类似，都是直接将文本放于dom上展示 -->
+            <!-- 但是一般不用v-text，因为它不灵活 -->
+            <h2 v-text="message"></h2>
+
+            <h1>{{message}},李银河</h1> <!-- 显示的是 【你好啊,李银河】 -->
+            <h1 v-text="message">,李银河</h1> <!-- 显示的是【你好啊】,并没实现拼接，而是直接将值整体覆盖 -->
+
+        </div>
+        <script>
+            const app = new Vue({
+                el:"#app",
+                data:{
+                    message:"你好啊"
+                }
+            });
+        </script>
+    </body>
+</html>

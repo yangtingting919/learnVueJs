@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <div id="app">
+                <!-- <label for="hobby" id="hobby" >
+                    <input type="checkbox" value="音乐" v-model="hobbies">音乐
+                    <input type="checkbox" value="电视剧" v-model="hobbies">电视剧
+                    <input type="checkbox" value="书籍" v-model="hobbies">书籍
+                    <input type="checkbox" value="舞蹈" v-model="hobbies">舞蹈
+                    <input type="checkbox" value="纪录片" v-model="hobbies">纪录片
+                </label> -->
+
+                <!-- 【值绑定】
+                前面定义input时，value都是直接给定的，
+                但在真实开发中，这些input的value值可能是从网络获取或定义在data中的
+                所以，我们可以通过v-bind:value动态的给value赋值 -->
+
+                <label v-for="item in originHobbies" :for="item">
+                    <input type="checkbox" :value="item" v-model="hobbies" :id="item">{{item}}
+                </label>
+
+                <h2>你选择的爱好是：{{hobbies}}</h2>
+        </div>
+        <script>
+            const app =new Vue({
+                el:'#app',
+                data:{
+                    message:"你好啊",
+                    hobbies:[],
+                    originHobbies:['篮球','足球','乒乓球','台球','羽毛球']
+                }
+            });
+        </script>
+    </body>
+</html>

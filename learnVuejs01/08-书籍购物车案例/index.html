@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="./style.css">
+
+    </head>
+
+    <body>
+        <div id="app">
+            <!-- length为0时 v-if为false -->
+            <div v-if="books.length">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>书籍名称</th>
+                            <th>出版日期</th>
+                            <th>价格</th>
+                            <th>购买数量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(book,index) in books">
+                            <!-- <td v-for="value in book">{{value}}</td> -->
+                            <td>{{book.id}}</td>
+                            <td>{{book.name}}</td>
+                            <td>{{book.date}}</td>
+                            <!-- <td>{{'￥'+book.price.toFixed(2)}}</td> 第一种【toFixed】保留两位小数-->
+                            <!-- <td>{{getFinalPrice(book.price)}}</td>   第二种【methods方式】-->
+                            <td>{{book.price | showPrice}}</td> <!-- 推荐第三种 【过滤器】方式！ -->
+                            
+                            <td>
+                                <button @click="sub(index)" v-bind:disabled="book.count <=1">-</button>
+                                {{book.count}}
+                                <button @click="add(index)">+</button>
+                            </td>
+                            <td><button @click="removeHandle($event,book,index)">移除</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <h2>总价格{{getFinalPrice(totalPrice)}}</h2> 【计算属性+methods方式】-->
+                <h2>总价格：{{totalPrice | showPrice}}</h2>  <!-- 【计算属性+过滤器】 -->
+
+            </div>
+            <h2 v-else>购物车为空</h2>
+        </div>
+
+        <script src="../js/vue.js"></script>
+        <script src="./main.js"></script>
+    </body>
+</html>
